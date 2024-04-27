@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADD | RECIPE BOOK</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-light container">
+    <div class="mt-5 container mb-5">
+      <h1 class="text-center text-danger mb-5"><u>RECIPE BOOK</u></h1>
+      <form
+        action=""
+        id="form"
+        method="post"
+        enctype="multipart/form-data"
+        class="col-6 mx-auto card p-3 bg-light shadow-lg"
+      >
+        {% csrf_token %}
+        <h2 class="text-primary">ADD RECIPE</h2>
+        <hr />
+        <div class="mb-3">
+          <label for="receipename" class="form-label">Recipe Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="receipename"
+            id="receipename"
+          /><br />
+        </div>
+        <div class="mb-3">
+          <label for="receipedesc" class="form-label">Recipe Description</label>
+          <textarea
+            name="receipedesc"
+            class="form-control"
+            id="receipedesc"
+          ></textarea
+          ><br />
+        </div>
+        <div class="mb-3">
+          <label for="receipeimg" class="form-label">Recipe Image</label>
+          <input
+            type="file"
+            class="form-control"
+            name="receipeimg"
+            id="receipeimg"
+          />
+        </div>
+        <div class="d-grid gap-2 d-md-block text-center">
+          <input
+            type="submit"
+            value="ADD TO RECIPE BOOK"
+            class="btn btn-success mx-4 mt-4"
+          />
+          <a href="/" class="btn btn-warning mx-4 mt-4">GO TO RECIPE BOOK</a>
+        </div>
+      </form>
+    </div>
+    {% comment %} <hr />
+    <form>
+      <div class="mx-auto col-6">
+        <label for="search" class="form-label">Search For Recipe</label>
+        <input type="text" class="form-control" name="search" id="search" />
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+          <input type="submit" value="SEARCH" class="btn btn-outline-primary" />
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive mt-5 container">
+      <table
+        class="table table-bordered table align-middle table-hover table-warning"
+      >
+        <thead class="table-primary">
+          <tr>
+            <td class="text-center">S.No.</td>
+            <td class="text-center">Recipe Name</td>
+            <td class="text-center">Recipe Description</td>
+            <td class="text-center">Recipe Image</td>
+            <td class="text-center">DELETE/UPDATE</td>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          {% for i in receipe %}
+          <tr>
+            <td class="text-center text-dark">{{forloop.counter}}</td>
+            <td class="text-center text-dark">{{i.receipename}}</td>
+            <td class="text-center text-dark">{{i.receipedesc}}</td>
+            <td class="text-center text-dark">
+              <img src="/media/{{i.receipeimg}}" style="width: 200px" />
+            </td>
+            <td>
+              <div class="d-grid gap-2">
+                <a href="/delete-receipe/{{i.id}}" class="btn btn-danger"
+                  >DELETE</a
+                >
+                <a href="/update-receipe/{{i.id}}" class="btn btn-success"
+                  >UPDATE</a
+                >
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div> {% endcomment %}
+  </body>
+</html>
